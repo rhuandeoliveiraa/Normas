@@ -59,7 +59,6 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
     @Transactional(readOnly = true)
     public List<Usuario> procurarTodos() {
        return super.procurarTodos();
-
     }
 
     private Long idValido(Long id) {
