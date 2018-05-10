@@ -21,7 +21,7 @@ import java.util.List;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"br.ufg.normas"})
 
-public class SpringRootConfig extends WebMvcConfigurerAdapter {
+public class  SpringRootConfig extends WebMvcConfigurerAdapter {
 
 
     @Override

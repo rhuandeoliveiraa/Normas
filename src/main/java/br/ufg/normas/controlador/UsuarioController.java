@@ -26,14 +26,17 @@ public class UsuarioController  {
     @Qualifier("usuariodao")
     @Autowired
     private IUsuarioDao dao;
-    teste
+
 
    // normas/usuarios/salvar/
     @PostMapping("/salvar")
     public Usuario salvar(@RequestBody Usuario usuario) {
-
-        dao.salvar(usuario);
-        return usuario;
+        if (dao.existeEmail(usuario.getEmail())){
+            return algumacoisa
+        } else {
+            dao.salvar(usuario);
+            return usuario;
+        }
     }
 
     // normas/usuarios/excluir/iddesejado
