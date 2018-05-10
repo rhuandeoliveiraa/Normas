@@ -22,7 +22,7 @@ public class  SpringJpaConfig {
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/normas");
+        ds.setUrl("jdbc:postgresql://localhost:5433/normas");
         ds.setUsername("postgres");
         ds.setPassword("root");
         return ds;
@@ -63,7 +63,7 @@ public class  SpringJpaConfig {
         Properties props = new Properties();
         props.setProperty("hibernate.show_sql", "true");
         props.setProperty("hibernate.format_sql", "true");
-        props.setProperty("hibernate.hbm2ddl.auto", "create");
+        props.setProperty("hibernate.hbm2ddl.auto", "update");
         return props;
 
 

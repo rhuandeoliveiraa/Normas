@@ -1,17 +1,17 @@
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\persistencia\GenericDaoImpl.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\excecao\IdNaoValidoServiceException.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\modelo\Usuario.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\configuracao\SpringRootConfig.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\controlador\UsuarioController.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\configuracao\SpringInitConfig.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\excecao\NegocioException.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\persistencia\UsuarioDaoImpl.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\excecao\ConexaoException.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\modelo\DetalheErro.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\modelo\Situacao.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\persistencia\IGenericDao.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\excecao\NaoExisteDaoException.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\modelo\Norma.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\excecao\RestExceptionHandler.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\persistencia\IUsuarioDao.java
-J:\Intellij Projects\backendgit\normas\src\main\java\br\ufg\normas\configuracao\SpringJpaConfig.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/excecao/IdNaoValidoServiceException.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/modelo/Usuario.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/configuracao/SpringInitConfig.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/modelo/Situacao.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/excecao/RestExceptionHandler.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/excecao/ConexaoException.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/modelo/Norma.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/persistencia/GenericDaoImpl.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/persistencia/IUsuarioDao.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/persistencia/IGenericDao.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/excecao/NaoExisteDaoException.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/configuracao/SpringRootConfig.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/controlador/UsuarioController.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/persistencia/UsuarioDaoImpl.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/configuracao/SpringJpaConfig.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/excecao/NegocioException.java
+/Users/Rhuan/Documents/backend/github/normas/src/main/java/br/ufg/normas/modelo/DetalheErro.java

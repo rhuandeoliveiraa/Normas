@@ -1,7 +1,0 @@
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:30:53 -0300] "POST /normas/usuarios/salvar HTTP/1.1" 200 192 http-bio-9090-exec-2 427
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:31:00 -0300] "GET /normas/usuarios/listar HTTP/1.1" 200 194 http-bio-9090-exec-3 286
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:31:59 -0300] "GET /normas/usuarios/pesquisar/1 HTTP/1.1" 200 192 http-bio-9090-exec-4 55
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:33:14 -0300] "POST /normas/usuarios/salvar HTTP/1.1" 200 192 http-bio-9090-exec-7 39
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:33:19 -0300] "GET /normas/usuarios/listar HTTP/1.1" 200 387 http-bio-9090-exec-8 35
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:33:25 -0300] "DELETE /normas/usuarios/excluir/2 HTTP/1.1" 204 - http-bio-9090-exec-9 84
-0:0:0:0:0:0:0:1 - - [09/May/2018:18:33:31 -0300] "GET /normas/usuarios/listar HTTP/1.1" 200 194 http-bio-9090-exec-10 69
