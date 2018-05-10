@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Repository
-@Qualifier("usuariodao")
+
 public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
     void salvar(Usuario usuario);

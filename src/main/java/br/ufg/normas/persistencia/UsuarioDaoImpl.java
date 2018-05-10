@@ -21,6 +21,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 @Repository
 @Transactional
+@Qualifier("usuariodao")
 public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUsuarioDao {
 
 

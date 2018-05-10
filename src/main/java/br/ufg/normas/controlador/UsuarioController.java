@@ -2,16 +2,16 @@ package br.ufg.normas.controlador;
 
 import br.ufg.normas.modelo.Usuario;
 
-import br.ufg.normas.persistencia.IGenericDao;
+//import br.ufg.normas.persistencia.IGenericDao;
 import br.ufg.normas.persistencia.IUsuarioDao;
-import br.ufg.normas.persistencia.UsuarioDaoImpl;
+//import br.ufg.normas.persistencia.UsuarioDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
