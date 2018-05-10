@@ -15,7 +15,7 @@ import java.util.Properties;
 
 @Configuration
 
-public class SpringJpaConfig {
+public class  SpringJpaConfig {
 
 
     @Bean

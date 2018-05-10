@@ -24,7 +24,7 @@ import java.util.List;
 @Qualifier("usuariodao")
 public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUsuarioDao {
 
-
+    private EntityManager entityManager;
 
 
     @Override
@@ -55,10 +55,26 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
     }
 
 
+
+
     @Override
     @Transactional(readOnly = true)
     public List<Usuario> procurarTodos() {
        return super.procurarTodos();
+    }
+
+    @Override
+    public boolean existeEmail(String email) {
+                this.entityManager
+                .createQuery("select u from USUARIO u where u.email = ?1")
+                .setParameter(1,email)
+                .getSingleResult();
+
+        if (existeEmail(email)){
+            return true;
+        }
+        else return false;
+
     }
 
     private Long idValido(Long id) {
