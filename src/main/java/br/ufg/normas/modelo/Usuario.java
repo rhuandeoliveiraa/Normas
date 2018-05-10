@@ -33,6 +33,10 @@ public class Usuario implements Serializable {
     @Expose
     @Column
     private String senha;
+    /*
+    @Expose
+    @Column
+    private String confirmacaoSenha;*/
 
     @Expose
    // @JsonFormat(pattern = "dd/MM/yyyy")

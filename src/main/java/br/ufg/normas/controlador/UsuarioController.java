@@ -31,12 +31,9 @@ public class UsuarioController  {
    // normas/usuarios/salvar/
     @PostMapping("/salvar")
     public Usuario salvar(@RequestBody Usuario usuario) {
-        if (dao.existeEmail(usuario.getEmail())){
-            return algumacoisa
-        } else {
-            dao.salvar(usuario);
-            return usuario;
-        }
+
+        dao.salvar(usuario);
+        return usuario;
     }
 
     // normas/usuarios/excluir/iddesejado
