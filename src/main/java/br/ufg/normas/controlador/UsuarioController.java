@@ -26,6 +26,7 @@ public class UsuarioController  {
     @Qualifier("usuariodao")
     @Autowired
     private IUsuarioDao dao;
+    teste
 
    // normas/usuarios/salvar/
     @PostMapping("/salvar")
