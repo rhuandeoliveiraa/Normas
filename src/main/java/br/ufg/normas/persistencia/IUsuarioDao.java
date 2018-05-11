@@ -25,4 +25,6 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
     boolean existeEmail(String email);
 
+    Long numRegistros(String attb, String value, Class classe);
+
 }

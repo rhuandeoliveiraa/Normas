@@ -1,7 +1,5 @@
 package br.ufg.normas.excecao;
 
-import br.ufg.normas.excecao.IdNaoValidoServiceException;
-import br.ufg.normas.excecao.NaoExisteDaoException;
 import br.ufg.normas.modelo.DetalheErro;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -55,7 +53,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
-    @ExceptionHandler({NegocioException.class})
+    @ExceptionHandler({NegocioExcecao.class})
     public ResponseEntity<Object> negocioExceptionHandler(Exception ex, WebRequest request) {
 
         return handleExceptionInternal(
@@ -71,7 +69,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                 new HttpHeaders(), HttpStatus.PRECONDITION_FAILED, request);
     }
 
-    @ExceptionHandler({ConexaoException.class})
+    @ExceptionHandler({ConexaoExcecao.class})
     public ResponseEntity<Object> conexaoRecusadaExceptionHandler(Exception ex, WebRequest request) {
 
         return handleExceptionInternal(
@@ -86,7 +84,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                         .build(),
                 new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE, request);
     }
-/*
+
     @ExceptionHandler({NaoExisteDaoException.class})
     public ResponseEntity<Object> entidadeNaoEncontrada(NaoExisteDaoException ex, WebRequest request) {
 
@@ -100,6 +98,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                         .build(),
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+    /*
 
     @ExceptionHandler({org.hibernate.PropertyValueException.class})
     public ResponseEntity<Object> propriedadeNula(org.hibernate.PropertyValueException ex, WebRequest request) {

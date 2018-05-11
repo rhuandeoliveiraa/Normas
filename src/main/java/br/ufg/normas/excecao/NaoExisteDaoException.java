@@ -1,10 +1,20 @@
 package br.ufg.normas.excecao;
 
-public class  NaoExisteDaoException extends  RuntimeException{
+import br.ufg.normas.modelo.RespostaHttp;
 
-    public NaoExisteDaoException(String message) {
+import java.util.List;
 
-        super(message);
+public class  NaoExisteDaoException extends BaseExcecao{
+
+    public NaoExisteDaoException(List<RespostaHttp> respostasHttp){
+        super.setRespostasHttp(respostasHttp);
     }
+
+    public NaoExisteDaoException(){}
+
+    public NaoExisteDaoException(String description){
+        super(description);
+    }
+
 
 }

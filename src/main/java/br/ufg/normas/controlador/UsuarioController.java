@@ -1,21 +1,22 @@
 package br.ufg.normas.controlador;
 
+import br.ufg.normas.modelo.RespostaHttp;
 import br.ufg.normas.modelo.Usuario;
 
-//import br.ufg.normas.persistencia.IGenericDao;
 import br.ufg.normas.persistencia.IUsuarioDao;
-//import br.ufg.normas.persistencia.UsuarioDaoImpl;
+import br.ufg.normas.service.Validacao;
+import br.ufg.normas.excecao.NegocioExcecao;
+import br.ufg.normas.utils.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.HttpStatus;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -25,30 +26,57 @@ public class UsuarioController  {
 
     @Qualifier("usuariodao")
     @Autowired
-    private IUsuarioDao dao;
+    private IUsuarioDao usuarioDao;
 
 
    // normas/usuarios/salvar/
-    @PostMapping("/salvar")
-    public Usuario salvar(@RequestBody Usuario usuario) {
+    @PostMapping("/cadastrar")
+    public RespostaHttp salvar(@RequestBody Usuario usuario) {
 
-        dao.salvar(usuario);
-        return usuario;
+
+        //Boolean isCadastro = usuario.getId() == 0;
+
+        //verificar os campos obrigatórios
+        if(Strings.isNullOrEmpty(usuario.getNome()) || Strings.isNullOrEmpty(usuario.getSobrenome()) ||
+           Strings.isNullOrEmpty(usuario.getEmail() )|| Strings.isNullOrEmpty(usuario.getSenha())) {
+            throw  new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME01")));
+        }
+
+        //verificar se email e senha são válidos
+        else if (!Validacao.validarEmail(usuario.getEmail()) ||
+                !Validacao.validarSenha(usuario.getSenha()))
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME09")));
+
+
+        //verificar se já existe email cadastrado
+        else if (usuarioDao.numRegistros("email",usuario.getEmail(),String.class) == 1)
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
+
+        usuario.setDataCadastro(new Date());
+        usuario.setDataInicioAdmin(new Date());
+        usuario.setDataFimAdmin(new Date());
+        usuarioDao.salvar(usuario);
+        return new RespostaHttp("MS01",usuario.getId());
+
     }
+
+
+
+
 
     // normas/usuarios/excluir/iddesejado
     @DeleteMapping("/excluir/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable("id") Long id){
 
-        dao.deletar(id);
+        usuarioDao.deletar(id);
     }
 
     // normas/usuarios/editar/iddesejado
     @PutMapping("/editar/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Usuario editar(@PathVariable("id") Long id, @RequestBody Usuario usuario){
-        dao.atualizar(id,usuario);
+        usuarioDao.atualizar(id,usuario);
         return usuario;
     }
 
@@ -57,7 +85,7 @@ public class UsuarioController  {
     @ResponseStatus(HttpStatus.OK)
     public Usuario pesquisarUsuario(@PathVariable("id") Long id) {
 
-        return dao.procurarPorId(id);
+        return usuarioDao.procurarPorId(id);
     }
 
     // normas/usuarios/listar
@@ -66,7 +94,7 @@ public class UsuarioController  {
     @ResponseStatus(HttpStatus.OK)
     public List<Usuario> listar() {
 
-        return dao.procurarTodos();
+        return usuarioDao.procurarTodos();
     }
 
 

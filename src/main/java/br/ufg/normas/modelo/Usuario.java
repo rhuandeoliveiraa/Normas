@@ -33,29 +33,30 @@ public class Usuario implements Serializable {
     @Expose
     @Column
     private String senha;
-    /*
-    @Expose
-    @Column
-    private String confirmacaoSenha;*/
+
+
+    //private String confirmacaoSenha;
 
     @Expose
-   // @JsonFormat(pattern = "dd/MM/yyyy")
     @Column
+    @Temporal(TemporalType.DATE)
     private Date dataCadastro;
 
     @Expose
-   // @JsonFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
     @Column
     private Date dataInicioAdmin;
 
     @Expose
-   // @JsonFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
     @Column
     private Date dataFimAdmin;
 
     @Expose
     @Column
     private Situacao situacao = Situacao.ATIVO;
+
+
 
     /*
 
@@ -140,7 +141,6 @@ public class Usuario implements Serializable {
     }
 
 
-
     public Situacao getSituacao() {
         return situacao;
     }
@@ -148,6 +148,14 @@ public class Usuario implements Serializable {
     public void setSituacao(Situacao situacao) {
         this.situacao = situacao;
     }
+    /*
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
+    }*/
 
     @Override
     public boolean equals(Object o) {
@@ -159,6 +167,7 @@ public class Usuario implements Serializable {
                 Objects.equals(sobrenome, usuario.sobrenome) &&
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(senha, usuario.senha) &&
+                //Objects.equals(confirmacaoSenha, usuario.confirmacaoSenha) &&
                 Objects.equals(dataCadastro, usuario.dataCadastro) &&
                 Objects.equals(dataInicioAdmin, usuario.dataInicioAdmin) &&
                 Objects.equals(dataFimAdmin, usuario.dataFimAdmin) &&
@@ -168,7 +177,7 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, nome, sobrenome, email, senha, dataCadastro, dataInicioAdmin, dataFimAdmin, situacao);
+        return Objects.hash(id, nome, sobrenome, email, senha,  dataCadastro, dataInicioAdmin, dataFimAdmin, situacao);
     }
 
     @Override
@@ -179,6 +188,7 @@ public class Usuario implements Serializable {
                 ", sobrenome='" + sobrenome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+               // ", confirmacaoSenha='" + confirmacaoSenha + '\'' +
                 ", dataCadastro=" + dataCadastro +
                 ", dataInicioAdmin=" + dataInicioAdmin +
                 ", dataFimAdmin=" + dataFimAdmin +
