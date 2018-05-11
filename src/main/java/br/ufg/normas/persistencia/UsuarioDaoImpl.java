@@ -1,22 +1,14 @@
  package br.ufg.normas.persistencia;
 
-import br.ufg.normas.excecao.IdNaoValidoServiceException;
-import br.ufg.normas.excecao.NaoExisteDaoException;
-import br.ufg.normas.modelo.Usuario;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+ import br.ufg.normas.excecao.IdNaoValidoServiceException;
+ import br.ufg.normas.modelo.Usuario;
+ import org.springframework.beans.factory.annotation.Qualifier;
+ import org.springframework.stereotype.Repository;
+ import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
-import java.io.Serializable;
-import java.util.List;
+ import javax.persistence.EntityManager;
+ import javax.persistence.Query;
+ import java.util.List;
 
 @SuppressWarnings("unchecked")
 @Repository
@@ -74,6 +66,26 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
             return true;
         }
         else return false;
+
+    }
+
+    public Long numRegistros(String attb, String value, Class classe){
+        Boolean isString = classe == String.class ? true : false;
+        String comparador = isString ? "LIKE" : "=";
+
+        Query jpql = entityManager.createQuery("select count(*) from Usuario where " + attb + " " + comparador + " :1");
+
+
+        if(isString){
+            jpql.setParameter(1,value);
+
+        } else {
+            jpql.setParameter(1,Long.parseLong(value));
+
+             }
+        Long count = (Long) jpql.getSingleResult();
+        return count;
+
 
     }
 

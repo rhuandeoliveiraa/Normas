@@ -1,7 +1,8 @@
+
 package br.ufg.normas.modelo;
 import com.google.gson.annotations.Expose;
 
-
+import br.ufg.normas.modelo.TipoRetorno;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ public class RespostaHttp {
   //  private Map<String, String> parametros = new FastMa;
 
     @Expose
-    private Map<String, String> teste = new HashMap<>();
+    private Map<String, String> parametros = new HashMap<>();
 
     @Expose
     private List<String> observacoes = new ArrayList<>();
@@ -99,4 +100,4 @@ public class RespostaHttp {
         this.objeto = objeto;
     }
 }
-}
+
