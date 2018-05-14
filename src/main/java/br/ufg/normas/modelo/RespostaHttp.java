@@ -3,11 +3,13 @@ package br.ufg.normas.modelo;
 import com.google.gson.annotations.Expose;
 
 import br.ufg.normas.modelo.TipoRetorno;
+import org.codehaus.plexus.util.FastMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 public class RespostaHttp {
@@ -17,7 +19,7 @@ public class RespostaHttp {
   //  private Map<String, String> parametros = new FastMa;
 
     @Expose
-    private Map<String, String> parametros = new HashMap<>();
+    private Map<String, String> parametros = new FastMap();
 
     @Expose
     private List<String> observacoes = new ArrayList<>();
@@ -32,19 +34,24 @@ public class RespostaHttp {
         this.setCodigo(codigo);}
 
     public RespostaHttp(String codigo, TipoRetorno tipo){
-        this.setCodigo(codigo); this.setTipo(tipo);}
+        this.setCodigo(codigo);
+        this.setTipo(tipo);}
 
     public RespostaHttp(){
         this.setParametros(getParametros());}
 
     public RespostaHttp(String codigo, Map<String, String> parametros){
-        this.setCodigo(codigo); this.setParametros(parametros);}
+        this.setCodigo(codigo);
+        this.setParametros(parametros);}
 
     public RespostaHttp(String codigo, List<String> obs){
-        this.setCodigo(codigo); this.setObservacoes(obs);}
+        this.setCodigo(codigo);
+        this.setObservacoes(obs);}
 
     public RespostaHttp(String codigo, List<String> obs, TipoRetorno tipo){
-        this.setCodigo(codigo); this.setObservacoes(obs); this.setTipo(tipo);}
+        this.setCodigo(codigo);
+        this.setObservacoes(obs);
+        this.setTipo(tipo);}
 
     public RespostaHttp(String codigo, Object objeto){
         this.setCodigo(codigo);

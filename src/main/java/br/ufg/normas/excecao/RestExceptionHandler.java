@@ -1,4 +1,4 @@
-package br.ufg.normas.excecao;
+/*package br.ufg.normas.excecao;
 
 import br.ufg.normas.modelo.DetalheErro;
 import org.springframework.http.HttpHeaders;
@@ -14,9 +14,9 @@ import java.util.Date;
 import java.sql.Timestamp;
 
 @ControllerAdvice //trabalha como listener (ouvinte), sempre que uma exceção for lançada essa notacão irá capturá-la
-/* Extendendo a classe  ResponseEntityExceptionHandler, pois ela fornece o método handleExceptionInternal, que será o responsável
-   por enviar para aplicação cliente o objeto com a exceção tratada
- */
+ //Extendendo a classe  ResponseEntityExceptionHandler, pois ela fornece o método handleExceptionInternal, que será o responsável
+   //por enviar para aplicação cliente o objeto com a exceção tratada
+
 public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
 
     @ExceptionHandler({IdNaoValidoServiceException.class})
@@ -51,7 +51,8 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                         .addclasse(ex.getClass().getSimpleName())
                         .build(),
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
-    }
+    } */
+/*
 
     @ExceptionHandler({NegocioExcecao.class})
     public ResponseEntity<Object> negocioExceptionHandler(Exception ex, WebRequest request) {
@@ -98,7 +99,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                         .build(),
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
-    /*
+
 
     @ExceptionHandler({org.hibernate.PropertyValueException.class})
     public ResponseEntity<Object> propriedadeNula(org.hibernate.PropertyValueException ex, WebRequest request) {
@@ -147,7 +148,7 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
                         .build(),
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
-*/
+
 
 
     private String getPath(WebRequest request) { //recupera URI q fez a requisição ao webservice
@@ -160,5 +161,5 @@ public class RestExceptionHandler  extends ResponseEntityExceptionHandler  {
         return ((ServletWebRequest) request).getRequest().getMethod();
     }
 
-}
+}*/
 

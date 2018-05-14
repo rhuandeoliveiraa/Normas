@@ -1,22 +1,25 @@
 package br.ufg.normas.controlador;
 
+import br.ufg.normas.excecao.NegocioExcecao;
 import br.ufg.normas.modelo.RespostaHttp;
+import br.ufg.normas.modelo.Situacao;
 import br.ufg.normas.modelo.Usuario;
-
 import br.ufg.normas.persistencia.IUsuarioDao;
 import br.ufg.normas.service.Validacao;
-import br.ufg.normas.excecao.NegocioExcecao;
 import br.ufg.normas.utils.Strings;
+import org.codehaus.plexus.util.FastMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
-import java.util.*;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.ApplicationContextAware;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -36,10 +39,12 @@ public class UsuarioController  {
 
         //Boolean isCadastro = usuario.getId() == 0;
 
+
         //verificar os campos obrigatórios
         if(Strings.isNullOrEmpty(usuario.getNome()) || Strings.isNullOrEmpty(usuario.getSobrenome()) ||
            Strings.isNullOrEmpty(usuario.getEmail() )|| Strings.isNullOrEmpty(usuario.getSenha())) {
             throw  new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME01")));
+
         }
 
         //verificar se email e senha são válidos
@@ -47,15 +52,20 @@ public class UsuarioController  {
                 !Validacao.validarSenha(usuario.getSenha()))
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME09")));
 
-
+        /*
         //verificar se já existe email cadastrado
         else if (usuarioDao.numRegistros("email",usuario.getEmail(),String.class) == 1)
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
+        else if (usuarioDao.existeEmail(usuario.getEmail())){
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
+        }*/
 
         usuario.setDataCadastro(new Date());
         usuario.setDataInicioAdmin(new Date());
-        usuario.setDataFimAdmin(new Date());
+        //usuario.setDataFimAdmin(new Date());
+        usuario.setSituacao(Situacao.ATIVO);
         usuarioDao.salvar(usuario);
+
         return new RespostaHttp("MS01",usuario.getId());
 
     }

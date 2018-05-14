@@ -58,7 +58,7 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
     @Override
     public boolean existeEmail(String email) {
                 this.entityManager
-                .createQuery("select u from USUARIO u where u.email = ?1")
+                .createQuery("select email from USUARIO u where u.email = ?1")
                 .setParameter(1,email)
                 .getSingleResult();
 
@@ -70,7 +70,7 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
     }
 
     public Long numRegistros(String attb, String value, Class classe){
-        Boolean isString = classe == String.class ? true : false;
+        Boolean isString = classe == String.class;
         String comparador = isString ? "LIKE" : "=";
 
         Query jpql = entityManager.createQuery("select count(*) from Usuario where " + attb + " " + comparador + " :1");
