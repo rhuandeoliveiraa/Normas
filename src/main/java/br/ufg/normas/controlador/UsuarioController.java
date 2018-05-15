@@ -36,7 +36,7 @@ public class UsuarioController  {
 
 
    // normas/usuarios/cadastrar/
-    @CrossOrigin(origins = "http://localhost:9090")
+    @CrossOrigin(origins = "http://192.168.1.120:9090")
     @PostMapping("/cadastrar")
     public RespostaHttp salvar(@RequestBody Usuario usuario) {
 
@@ -44,7 +44,7 @@ public class UsuarioController  {
         //verificar os campos obrigatórios
         if(Strings.isNullOrEmpty(usuario.getNome()) || Strings.isNullOrEmpty(usuario.getSobrenome()) ||
            Strings.isNullOrEmpty(usuario.getEmail() )|| Strings.isNullOrEmpty(usuario.getSenha())) {
-            throw  new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME01")));
+            throw  new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME01",TipoRetorno.ERRO)));
         }
 
         //verificar se email e senha são válidos
@@ -54,7 +54,7 @@ public class UsuarioController  {
 
         //verificar se a senha é igual a confirmação de senha
         else if(!usuario.getSenha().equals(usuario.getConfirmacaoSenha())) {
-            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME08")));
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME08",TipoRetorno.ERRO)));
 
         }
          /*
