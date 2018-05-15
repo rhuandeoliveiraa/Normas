@@ -41,6 +41,7 @@
           <element id="library" level="project" name="Maven: org.sonatype.sisu:sisu-inject-bean:1.4.2" />
           <element id="library" level="project" name="Maven: org.sonatype.sisu:sisu-guice:noaop:2.1.7" />
           <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-utils:3.0.15" />
+          <element id="library" level="project" name="Maven: org.javolution:javolution:5.3.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -126,6 +126,15 @@
             <version>3.0.15</version>
         </dependency>
 
+        <!-- Library Persistence -->
+        <dependency>
+            <groupId>org.javolution</groupId>
+            <artifactId>javolution</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+
+
+
     </dependencies>
 
 

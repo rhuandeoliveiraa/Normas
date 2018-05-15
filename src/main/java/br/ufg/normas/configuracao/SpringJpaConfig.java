@@ -8,6 +8,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -28,16 +31,6 @@ public class  SpringJpaConfig {
         return ds;
     }
 
-/*
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/normas?createDatabaseIfNotExist=true");
-        ds.setUsername("root");
-        ds.setPassword("root");
-        return ds;
-    } */
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
@@ -68,4 +61,5 @@ public class  SpringJpaConfig {
 
 
     }
+
 }

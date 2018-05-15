@@ -3,6 +3,7 @@ package br.ufg.normas.controlador;
 import br.ufg.normas.excecao.NegocioExcecao;
 import br.ufg.normas.modelo.RespostaHttp;
 import br.ufg.normas.modelo.Situacao;
+import br.ufg.normas.modelo.TipoRetorno;
 import br.ufg.normas.modelo.Usuario;
 import br.ufg.normas.persistencia.IUsuarioDao;
 import br.ufg.normas.service.Validacao;
@@ -21,46 +22,53 @@ import java.util.List;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.ApplicationContextAware;
 
+
 @RestController
 @RequestMapping(value = "/usuarios")
 
 
 public class UsuarioController  {
 
-    @Qualifier("usuariodao")
+
     @Autowired
     private IUsuarioDao usuarioDao;
 
 
-   // normas/usuarios/salvar/
+
+   // normas/usuarios/cadastrar/
+    @CrossOrigin(origins = "http://localhost:9090")
     @PostMapping("/cadastrar")
     public RespostaHttp salvar(@RequestBody Usuario usuario) {
-
-
-        //Boolean isCadastro = usuario.getId() == 0;
 
 
         //verificar os campos obrigatórios
         if(Strings.isNullOrEmpty(usuario.getNome()) || Strings.isNullOrEmpty(usuario.getSobrenome()) ||
            Strings.isNullOrEmpty(usuario.getEmail() )|| Strings.isNullOrEmpty(usuario.getSenha())) {
             throw  new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME01")));
-
         }
 
         //verificar se email e senha são válidos
         else if (!Validacao.validarEmail(usuario.getEmail()) ||
-                !Validacao.validarSenha(usuario.getSenha()))
-            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME09")));
+                !Validacao.validarSenha(usuario.getSenha())) {
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME09",TipoRetorno.ERRO)));}
 
-        /*
+        //verificar se a senha é igual a confirmação de senha
+        else if(!usuario.getSenha().equals(usuario.getConfirmacaoSenha())) {
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME08")));
+
+        }
+         /*
         //verificar se já existe email cadastrado
         else if (usuarioDao.numRegistros("email",usuario.getEmail(),String.class) == 1)
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
+
+
         else if (usuarioDao.existeEmail(usuario.getEmail())){
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
         }*/
 
         usuario.setDataCadastro(new Date());
+
         usuario.setDataInicioAdmin(new Date());
         //usuario.setDataFimAdmin(new Date());
         usuario.setSituacao(Situacao.ATIVO);

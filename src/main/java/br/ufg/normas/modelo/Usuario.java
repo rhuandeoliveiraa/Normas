@@ -34,8 +34,8 @@ public class Usuario implements Serializable {
     @Column
     private String senha;
 
-
-    //private String confirmacaoSenha;
+    @Expose
+    private String confirmacaoSenha;
 
     @Expose
     @Column
@@ -148,14 +148,14 @@ public class Usuario implements Serializable {
     public void setSituacao(Situacao situacao) {
         this.situacao = situacao;
     }
-    /*
+
     public String getConfirmacaoSenha() {
         return confirmacaoSenha;
     }
 
     public void setConfirmacaoSenha(String confirmacaoSenha) {
         this.confirmacaoSenha = confirmacaoSenha;
-    }*/
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -188,7 +188,7 @@ public class Usuario implements Serializable {
                 ", sobrenome='" + sobrenome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
-               // ", confirmacaoSenha='" + confirmacaoSenha + '\'' +
+                 ", confirmacaoSenha='" + confirmacaoSenha + '\'' +
                 ", dataCadastro=" + dataCadastro +
                 ", dataInicioAdmin=" + dataInicioAdmin +
                 ", dataFimAdmin=" + dataFimAdmin +

@@ -3,7 +3,7 @@ package br.ufg.normas.modelo;
 import com.google.gson.annotations.Expose;
 
 import br.ufg.normas.modelo.TipoRetorno;
-import org.codehaus.plexus.util.FastMap;
+import javolution.util.FastMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +16,8 @@ public class RespostaHttp {
     @Expose
     private String codigo;
 
-  //  private Map<String, String> parametros = new FastMa;
-
     @Expose
-    private Map<String, String> parametros = new FastMap();
+    private Map<String, String> parametros = new FastMap<>();
 
     @Expose
     private List<String> observacoes = new ArrayList<>();

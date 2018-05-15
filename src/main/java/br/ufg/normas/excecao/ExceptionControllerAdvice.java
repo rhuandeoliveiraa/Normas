@@ -46,6 +46,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
         erroResposta.setClassException(ex.getClass().getName());
         erroResposta.setRespostasHttp(((NegocioExcecao) ex).getRespostasHttp());
 
+
         System.out.println(ANSI_YELLOW+erroResposta+ANSI_RESET);
 
         return new ResponseEntity<Object>(erroResposta, HttpStatus.PRECONDITION_FAILED);
