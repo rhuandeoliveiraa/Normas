@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
+//@Repository
 
 public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
@@ -26,5 +26,6 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
     boolean existeEmail(String email);
 
     Long numRegistros(String attb, String value, Class classe);
+
 
 }

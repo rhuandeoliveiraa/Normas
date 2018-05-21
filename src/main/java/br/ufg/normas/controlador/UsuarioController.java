@@ -52,20 +52,24 @@ public class UsuarioController  {
                 !Validacao.validarSenha(usuario.getSenha())) {
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME09",TipoRetorno.ERRO)));}
 
+
+
         //verificar se a senha é igual a confirmação de senha
         else if(!usuario.getSenha().equals(usuario.getConfirmacaoSenha())) {
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME08",TipoRetorno.ERRO)));
 
         }
-         /*
+
         //verificar se já existe email cadastrado
         else if (usuarioDao.numRegistros("email",usuario.getEmail(),String.class) == 1)
-            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2",TipoRetorno.ERRO)));
 
-
-        else if (usuarioDao.existeEmail(usuario.getEmail())){
-            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2")));
+         /* else if (usuarioDao.existeEmail(usuario.getEmail())){
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2",TipoRetorno.ERRO)));
         }*/
+
+
+
 
         usuario.setDataCadastro(new Date());
 

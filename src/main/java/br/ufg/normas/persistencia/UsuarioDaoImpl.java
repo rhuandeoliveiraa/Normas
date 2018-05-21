@@ -7,15 +7,17 @@
  import org.springframework.transaction.annotation.Transactional;
 
  import javax.persistence.EntityManager;
+ import javax.persistence.PersistenceContext;
  import javax.persistence.Query;
  import java.util.List;
 
 @SuppressWarnings("unchecked")
 @Repository
 @Transactional
-@Qualifier("usuariodao")
+//@Qualifier("usuariodao")
 public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUsuarioDao {
 
+    @PersistenceContext
     private EntityManager entityManager;
 
 
@@ -57,15 +59,22 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
 
     @Override
     public boolean existeEmail(String email) {
-                this.entityManager
-                .createQuery("select email from USUARIO u where u.email = ?1")
-                .setParameter(1,email)
-                .getSingleResult();
 
-        if (existeEmail(email)){
+                System.out.println(email);
+
+                Query query = this.entityManager
+                .createQuery("select u from Usuario u where u.email = :emailcadastrado");
+                query.setParameter("emailcadastrado" ,email);
+                Usuario us =  (Usuario)query.getSingleResult();
+
+        if (us == null){
+            //Não cadastrado
+            return false;
+        }
+        else {
+            // Já cadastrado
             return true;
         }
-        else return false;
 
     }
 
@@ -73,7 +82,7 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
         Boolean isString = classe == String.class;
         String comparador = isString ? "LIKE" : "=";
 
-        Query jpql = entityManager.createQuery("select count(*) from Usuario where " + attb + " " + comparador + " :1");
+        Query jpql = this.entityManager.createQuery("select count(*) from Usuario where " + attb + " " + comparador + " ?1");
 
 
         if(isString){
