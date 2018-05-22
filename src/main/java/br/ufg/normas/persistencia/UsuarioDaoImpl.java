@@ -57,26 +57,6 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
        return super.procurarTodos();
     }
 
-    @Override
-    public boolean existeEmail(String email) {
-
-                System.out.println(email);
-
-                Query query = this.entityManager
-                .createQuery("select u from Usuario u where u.email = :emailcadastrado");
-                query.setParameter("emailcadastrado" ,email);
-                Usuario us =  (Usuario)query.getSingleResult();
-
-        if (us == null){
-            //Não cadastrado
-            return false;
-        }
-        else {
-            // Já cadastrado
-            return true;
-        }
-
-    }
 
     public Long numRegistros(String attb, String value, Class classe){
         Boolean isString = classe == String.class;
@@ -96,6 +76,13 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
         return count;
 
 
+    }
+
+    public Long numUsuarios(){
+        Query query = this.entityManager.createQuery("SELECT count(*) FROM Usuario ");
+        Long count = (Long) query.getSingleResult();
+        System.out.println("numero de usuarios: " +count);
+        return count;
     }
 
     private Long idValido(Long id) {

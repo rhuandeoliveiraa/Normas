@@ -23,9 +23,9 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
     List<Usuario> procurarTodos();
 
-    boolean existeEmail(String email);
-
     Long numRegistros(String attb, String value, Class classe);
+
+    Long numUsuarios();
 
 
 }

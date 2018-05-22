@@ -56,6 +56,10 @@ public class Usuario implements Serializable {
     @Column
     private Situacao situacao = Situacao.ATIVO;
 
+    @Expose
+    @Column
+    private TipoPapel papel = TipoPapel.USUARIO;
+
 
 
     /*
@@ -157,6 +161,14 @@ public class Usuario implements Serializable {
         this.confirmacaoSenha = confirmacaoSenha;
     }
 
+    public TipoPapel getPapel() {
+        return papel;
+    }
+
+    public void setPapel(TipoPapel papel) {
+        this.papel = papel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -186,13 +198,8 @@ public class Usuario implements Serializable {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                 ", confirmacaoSenha='" + confirmacaoSenha + '\'' +
-                ", dataCadastro=" + dataCadastro +
-                ", dataInicioAdmin=" + dataInicioAdmin +
-                ", dataFimAdmin=" + dataFimAdmin +
                 ", situacao=" + situacao +
+                ", papel=" + papel +
                 '}';
     }
 }
