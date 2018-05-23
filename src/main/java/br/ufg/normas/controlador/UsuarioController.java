@@ -1,5 +1,6 @@
 package br.ufg.normas.controlador;
 
+import br.ufg.normas.excecao.NaoExisteDaoException;
 import br.ufg.normas.excecao.NegocioExcecao;
 import br.ufg.normas.modelo.*;
 import br.ufg.normas.persistencia.IUsuarioDao;
@@ -60,22 +61,30 @@ public class UsuarioController  {
         usuario.setDataCadastro(new Date());
         usuarioDao.salvar(usuario);
 
-        return new RespostaHttp("MS01",usuario.getId()  );
+        return new RespostaHttp("MS01",usuario.getId());
 
     }
 
     // normas/usuarios/excluir/iddesejado
     @DeleteMapping("/excluir/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable("id") Long id){
+    public RespostaHttp excluir(@PathVariable("id") Long id){
+        Usuario usuario = usuarioDao.procurarPorId(id);
+        if(usuarioDao.procurarPorId(id) == null){
+            throw new NaoExisteDaoException(Collections.singletonList(new RespostaHttp("MA01", TipoRetorno.ALERTA)));
+        }
+        else {
+            usuarioDao.deletar(id);
+            return new RespostaHttp("MS01");
+        }
 
-        usuarioDao.deletar(id);
     }
 
     // normas/usuarios/editar/iddesejado
     @PutMapping("/editar/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RespostaHttp editar(@PathVariable("id") Long id, @RequestBody Usuario usuario){
+        usuarioDao.procurarPorId(id);
         usuarioDao.atualizar(id,usuario);
         return new RespostaHttp("MS01",usuario.getId());
     }
@@ -86,7 +95,13 @@ public class UsuarioController  {
     public RespostaHttp pesquisarUsuario(@PathVariable("id") Long id) {
         Usuario usuario = usuarioDao.procurarPorId(id);
 
-         return new RespostaHttp("MS01",usuario);
+        if(usuarioDao.procurarPorId(id) == null){
+            throw new NaoExisteDaoException(Collections.singletonList(new RespostaHttp("MA01", TipoRetorno.ALERTA)));
+        }
+            else {
+
+            return new RespostaHttp("MS01", usuario);
+        }
     }
 
     // normas/usuarios/listar

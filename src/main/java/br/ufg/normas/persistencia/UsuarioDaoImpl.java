@@ -36,7 +36,6 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
 
     @Override
     public void deletar(Long id) {
-        super.deletar(idValido(id));
         super.deletar(id);
     }
 
