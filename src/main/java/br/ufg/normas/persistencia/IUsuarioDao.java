@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Date;
 import java.util.List;
 
 //@Repository
@@ -26,6 +27,8 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
     Long numRegistros(String attb, String value, Class classe);
 
     Long numUsuarios();
+
+    Date buscarDataCadastro(Long id);
 
 
 }

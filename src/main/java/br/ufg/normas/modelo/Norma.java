@@ -1,28 +1,43 @@
 package br.ufg.normas.modelo;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
 @Table(name = "normas")
 public class Norma implements Serializable {
 
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Expose
     @Column
     private String nome;
 
-    @Column
+    @Expose
+    @Column(length = 5000)
     private String descricao;
 
-    @Column
-    private String dtcadastro;
+    @Expose
+    @Column(name = "dataCadastro")
+    @Temporal(TemporalType.DATE)
+    private Date dataCadastro;
 
-    @Column
-    private String arquivo;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuarios_normas",
+            joinColumns = @JoinColumn(name = "normas_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuarios_id"))
+    private java.util.Set<Usuario> usuarios = new HashSet<Usuario>();
+
+   /* @Column
+    private String arquivo;*/
 
     public Long getId() {
         return id;
@@ -48,20 +63,12 @@ public class Norma implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getDtcadastro() {
-        return dtcadastro;
+    public Date getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setDtcadastro(String dtcadastro) {
-        this.dtcadastro = dtcadastro;
-    }
-
-    public String getArquivo() {
-        return arquivo;
-    }
-
-    public void setArquivo(String arquivo) {
-        this.arquivo = arquivo;
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     @Override
@@ -72,13 +79,22 @@ public class Norma implements Serializable {
         return Objects.equals(id, norma.id) &&
                 Objects.equals(nome, norma.nome) &&
                 Objects.equals(descricao, norma.descricao) &&
-                Objects.equals(dtcadastro, norma.dtcadastro) &&
-                Objects.equals(arquivo, norma.arquivo);
+                Objects.equals(dataCadastro, norma.dataCadastro);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, nome, descricao, dtcadastro, arquivo);
+        return Objects.hash(id, nome, descricao, dataCadastro);
+    }
+
+    @Override
+    public String toString() {
+        return "Norma{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", dataCadastro=" + dataCadastro +
+                '}';
     }
 }

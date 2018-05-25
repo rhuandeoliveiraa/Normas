@@ -30,7 +30,7 @@ public class  SpringRootConfig extends WebMvcConfigurerAdapter {
     }
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("/web/index.html");
+        registry.addViewController("/").setViewName("/web/index.jsp");
     }
 
     @Override

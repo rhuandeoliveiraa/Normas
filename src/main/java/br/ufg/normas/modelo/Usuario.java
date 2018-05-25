@@ -2,10 +2,12 @@ package br.ufg.normas.modelo;
 
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.mapping.Set;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
@@ -59,6 +61,12 @@ public class Usuario implements Serializable {
     @Expose
     @Column
     private TipoPapel papel = TipoPapel.USUARIO;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuarios_normas",
+                joinColumns = @JoinColumn(name = "usuario_id"),
+                 inverseJoinColumns = @JoinColumn(name = "normas_id"))
+    private java.util.Set<Norma> normas = new HashSet<Norma>();
 
 
 

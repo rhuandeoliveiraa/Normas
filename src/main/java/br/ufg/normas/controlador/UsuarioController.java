@@ -65,28 +65,29 @@ public class UsuarioController  {
 
     }
 
-    // normas/usuarios/excluir/iddesejado
-    @DeleteMapping("/excluir/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public RespostaHttp excluir(@PathVariable("id") Long id){
-        Usuario usuario = usuarioDao.procurarPorId(id);
-        if(usuarioDao.procurarPorId(id) == null){
-            throw new NaoExisteDaoException(Collections.singletonList(new RespostaHttp("MA01", TipoRetorno.ALERTA)));
-        }
-        else {
-            usuarioDao.deletar(id);
-            return new RespostaHttp("MS01");
-        }
-
-    }
-
     // normas/usuarios/editar/iddesejado
     @PutMapping("/editar/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RespostaHttp editar(@PathVariable("id") Long id, @RequestBody Usuario usuario){
-        usuarioDao.procurarPorId(id);
+        //Busca no banco de dados a data de cadastro do usuário e já salva automaticamente quando o usuário for editado
+        usuario.setDataCadastro(usuarioDao.buscarDataCadastro(id));
+
         usuarioDao.atualizar(id,usuario);
         return new RespostaHttp("MS01",usuario.getId());
+    }
+
+    // normas/usuarios/excluir/iddesejado
+    @DeleteMapping("/excluir/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public RespostaHttp excluir(@PathVariable("id") Long id){
+       if(usuarioDao.procurarPorId(id) == null){
+            throw new NaoExisteDaoException(Collections.singletonList(new RespostaHttp("MA01", TipoRetorno.ALERTA)));
+        }
+        else {
+            usuarioDao.deletar(id);
+            return new RespostaHttp("MS01",id);
+        }
+
     }
 
     // normas/usuarios/pesquisar/iddesejado
@@ -104,7 +105,7 @@ public class UsuarioController  {
         }
     }
 
-    // normas/usuarios/listar
+    // normas/usuarios/listar/
 
     @GetMapping("/listar")
     @ResponseStatus(HttpStatus.OK)

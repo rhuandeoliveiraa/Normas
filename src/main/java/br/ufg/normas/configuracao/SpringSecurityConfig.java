@@ -28,4 +28,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 }
