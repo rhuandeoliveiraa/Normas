@@ -1,4 +1,4 @@
-package br.ufg.normas.service;
+package br.ufg.normas.utils;
 
 import java.util.regex.Pattern;
 

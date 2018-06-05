@@ -3,9 +3,13 @@ package br.ufg.normas.modelo;
 
 import com.google.gson.annotations.Expose;
 import org.hibernate.mapping.Set;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,7 +17,7 @@ import java.util.Objects;
 @Entity
 @SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq", initialValue = 1 ,allocationSize = 1)
 @Table(name = "usuarios")
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, UserDetails {
 
     @Expose
     @Id
@@ -68,9 +72,43 @@ public class Usuario implements Serializable {
                  inverseJoinColumns = @JoinColumn(name = "normas_id"))
     private java.util.Set<Norma> normas = new HashSet<Norma>();
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
-    /*
+ /*
 
     private String tokenDesbloqueio;
 

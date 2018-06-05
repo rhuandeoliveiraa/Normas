@@ -58,13 +58,7 @@ public abstract class GenericDaoImpl<E extends Serializable,k > implements IGene
        return entityManager.merge(entity);
     }
 
-    /*
-    @Override
-    public void deletar(E entity) {
 
-        entityManager.remove(entity);
-
-    }*/
     @Override
     public void deletar(k id){
         entityManager.remove(entityManager.getReference(entityClass,id));
@@ -88,16 +82,5 @@ public abstract class GenericDaoImpl<E extends Serializable,k > implements IGene
 
     }
 
-
-    /*
-    @Override
-    public List<E> procurarTodos() {
-        return this.entityManager
-                .createQuery("select x from " + ().getSimpleName() + " x")
-                .getResultList();
-
-
-
-    }*/
 
 }

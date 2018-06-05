@@ -30,5 +30,6 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
     Date buscarDataCadastro(Long id);
 
+    Usuario procurarPorLogin(String email);
 
 }

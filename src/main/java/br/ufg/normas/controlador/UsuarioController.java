@@ -4,7 +4,7 @@ import br.ufg.normas.excecao.NaoExisteDaoException;
 import br.ufg.normas.excecao.NegocioExcecao;
 import br.ufg.normas.modelo.*;
 import br.ufg.normas.persistencia.IUsuarioDao;
-import br.ufg.normas.service.Validacao;
+import br.ufg.normas.utils.Validacao;
 import br.ufg.normas.utils.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,10 +61,20 @@ public class UsuarioController  {
         usuario.setDataCadastro(new Date());
         usuarioDao.salvar(usuario);
 
+
         return new RespostaHttp("MS01",usuario.getId());
 
     }
+/*
+    @GetMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public RespostaHttp logar(@RequestBody Usuario usuario){
 
+       // usuarioDao.procurarPorLogin(usuario.getEmail());
+         return new RespostaHttp("MS01");
+
+    }
+*/
     // normas/usuarios/editar/iddesejado
     @PutMapping("/editar/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -109,10 +119,15 @@ public class UsuarioController  {
 
     @GetMapping("/listar")
     @ResponseStatus(HttpStatus.OK)
-    public List<Usuario> listar() {
-
-        return usuarioDao.procurarTodos();
-    }
+    public RespostaHttp listar() {
+        List<Usuario> usuario = usuarioDao.procurarTodos();
+        if (usuario.isEmpty()){
+            return new RespostaHttp("MA01",TipoRetorno.ALERTA);
+        }
+        else {
+            return new RespostaHttp("MS01", usuario);
+        }
+        }
 
 
 }

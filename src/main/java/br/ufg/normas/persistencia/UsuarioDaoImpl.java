@@ -2,8 +2,6 @@
 
  import br.ufg.normas.excecao.IdNaoValidoServiceException;
  import br.ufg.normas.modelo.Usuario;
- import org.hibernate.sql.Select;
- import org.springframework.beans.factory.annotation.Qualifier;
  import org.springframework.stereotype.Repository;
  import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +57,8 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
         return super.procurarTodos();
     }
 
+
+
     //Retorna o número de registros presentes no banco de dados dependendo do atributo que for passado
     public Long numRegistros(String attb, String value, Class classe){
         Boolean isString = classe == String.class;
@@ -76,6 +76,15 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
              }
         Long count = (Long) jpql.getSingleResult();
         return count;
+
+
+    }
+
+    public Usuario procurarPorLogin(String email){
+       Query query = this.entityManager.createQuery("select u from Usuario u where u.email = ?1 ");
+       query.setParameter(1,email);
+
+       return (Usuario) query.getSingleResult();
 
 
     }

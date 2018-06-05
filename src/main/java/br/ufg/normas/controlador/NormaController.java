@@ -2,6 +2,7 @@ package br.ufg.normas.controlador;
 
 import br.ufg.normas.modelo.Norma;
 import br.ufg.normas.modelo.RespostaHttp;
+import br.ufg.normas.modelo.TipoRetorno;
 import br.ufg.normas.persistencia.INormaDao;
 import br.ufg.normas.persistencia.NormaDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,15 @@ public class NormaController {
 
     @GetMapping("/listar")
     @ResponseStatus(HttpStatus.OK)
-    public List<Norma> listar() {
+    public RespostaHttp listar() {
+        List<Norma> usuario = normaDao.procurarTodos();
+        if (usuario.isEmpty()){
+            return new RespostaHttp("MA01",TipoRetorno.ALERTA);
+        }
+        else {
+            return new RespostaHttp("MS01", usuario);
+        }
 
-        return normaDao.procurarTodos();
+        //return normaDao.procurarTodos();
     }
 }

@@ -8,6 +8,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 <header>
+    <title>Servidor Apache Tomcat 9</title>
     <style type="text/css">
 
         body{
@@ -47,6 +48,7 @@
     </style>
 </header>
 <body>
+
 <div class="box">
     <h2>Normas</h2>
 </div>
