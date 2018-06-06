@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
@@ -53,6 +54,36 @@ public class NormaDaoImpl extends GenericDaoImpl<Norma,Long> implements INormaDa
     public List<Norma> procurarTodos() {
 
         return super.procurarTodos();
+    }
+
+
+
+    //Retorna o número de registros presentes no banco de dados dependendo do atributo que for passado
+    public Long numRegistros(String attb, String value, Class classe){
+        Boolean isString = classe == String.class;
+        String comparador = isString ? "LIKE" : "=";
+
+        Query jpql = this.entityManager.createQuery("select count(*) from Norma where " + attb + " " + comparador + " ?1");
+
+
+        if(isString){
+            jpql.setParameter(1,value);
+
+        } else {
+            jpql.setParameter(1,Long.parseLong(value));
+
+        }
+        Long count = (Long) jpql.getSingleResult();
+        return count;
+
+
+    }
+
+    public List<Norma> pesquisarPorNome(String nome){
+        Query query = this.entityManager.createQuery("select nome from Norma where nome like %?1%");
+        query.setParameter(1,nome);
+        return  query.getResultList();
+
     }
 
     private Long idValido(Long id) {

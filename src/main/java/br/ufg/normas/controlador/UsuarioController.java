@@ -33,6 +33,8 @@ public class UsuarioController  {
             throw  new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME01",TipoRetorno.ERRO)));
         }
 
+
+
         //verificar se email e senha são válidos
         else if (!Validacao.validarEmail(usuario.getEmail()) ||
                 !Validacao.validarSenha(usuario.getSenha())) {
@@ -48,6 +50,8 @@ public class UsuarioController  {
         else if (usuarioDao.numRegistros("email",usuario.getEmail(),String.class) == 1) {
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME04_2", TipoRetorno.ERRO)));
         }
+
+
 
 
         //verificar se é o primeiro usuário
@@ -79,6 +83,12 @@ public class UsuarioController  {
     @PutMapping("/editar/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RespostaHttp editar(@PathVariable("id") Long id, @RequestBody Usuario usuario){
+        //Buscando a situação do usuário no banco de dados.
+        if ((usuarioDao.verificarSituacao(id).equals("INATIVO") )){
+            throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME10_2",TipoRetorno.ERRO)));
+
+        }
+
         //Busca no banco de dados a data de cadastro do usuário e já salva automaticamente quando o usuário for editado
         usuario.setDataCadastro(usuarioDao.buscarDataCadastro(id));
 
@@ -103,7 +113,7 @@ public class UsuarioController  {
     // normas/usuarios/pesquisar/iddesejado
     @GetMapping("/pesquisar/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public RespostaHttp pesquisarUsuario(@PathVariable("id") Long id) {
+    public RespostaHttp pesquisarUsuarioPorID(@PathVariable("id") Long id) {
         Usuario usuario = usuarioDao.procurarPorId(id);
 
         if(usuarioDao.procurarPorId(id) == null){

@@ -16,4 +16,8 @@ public interface INormaDao extends IGenericDao<Norma,Long> {
     Norma procurarPorId(Long id);
 
     List<Norma> procurarTodos();
+
+    Long numRegistros(String attb, String value, Class classe);
+
+    List<Norma> pesquisarPorNome(String nome);
 }

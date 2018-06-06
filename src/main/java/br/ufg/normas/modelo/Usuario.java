@@ -215,6 +215,14 @@ public class Usuario implements Serializable, UserDetails {
         this.papel = papel;
     }
 
+    public java.util.Set<Norma> getNormas() {
+        return normas;
+    }
+
+    public void setNormas(java.util.Set<Norma> normas) {
+        this.normas = normas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -225,17 +233,19 @@ public class Usuario implements Serializable, UserDetails {
                 Objects.equals(sobrenome, usuario.sobrenome) &&
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(senha, usuario.senha) &&
-                //Objects.equals(confirmacaoSenha, usuario.confirmacaoSenha) &&
+                Objects.equals(confirmacaoSenha, usuario.confirmacaoSenha) &&
                 Objects.equals(dataCadastro, usuario.dataCadastro) &&
                 Objects.equals(dataInicioAdmin, usuario.dataInicioAdmin) &&
                 Objects.equals(dataFimAdmin, usuario.dataFimAdmin) &&
-                situacao == usuario.situacao;
+                situacao == usuario.situacao &&
+                papel == usuario.papel &&
+                Objects.equals(normas, usuario.normas);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, nome, sobrenome, email, senha,  dataCadastro, dataInicioAdmin, dataFimAdmin, situacao);
+        return Objects.hash(id, nome, sobrenome, email, senha, confirmacaoSenha, dataCadastro, dataInicioAdmin, dataFimAdmin, situacao, papel, normas);
     }
 
     @Override
@@ -244,8 +254,15 @@ public class Usuario implements Serializable, UserDetails {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", confirmacaoSenha='" + confirmacaoSenha + '\'' +
+                ", dataCadastro=" + dataCadastro +
+                ", dataInicioAdmin=" + dataInicioAdmin +
+                ", dataFimAdmin=" + dataFimAdmin +
                 ", situacao=" + situacao +
                 ", papel=" + papel +
+                ", normas=" + normas +
                 '}';
     }
 }

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "normas")
@@ -22,13 +23,17 @@ public class Norma implements Serializable {
     private String nome;
 
     @Expose
-    @Column(length = 5000)
+    @Column(length = 10000)
     private String descricao;
 
     @Expose
     @Column(name = "dataCadastro")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
+
+    @Expose
+    @Column
+    private String url;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "usuarios_normas",
@@ -71,6 +76,22 @@ public class Norma implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,13 +100,15 @@ public class Norma implements Serializable {
         return Objects.equals(id, norma.id) &&
                 Objects.equals(nome, norma.nome) &&
                 Objects.equals(descricao, norma.descricao) &&
-                Objects.equals(dataCadastro, norma.dataCadastro);
+                Objects.equals(dataCadastro, norma.dataCadastro) &&
+                Objects.equals(url, norma.url) &&
+                Objects.equals(usuarios, norma.usuarios);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, nome, descricao, dataCadastro);
+        return Objects.hash(id, nome, descricao, dataCadastro, url, usuarios);
     }
 
     @Override
@@ -95,6 +118,8 @@ public class Norma implements Serializable {
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", dataCadastro=" + dataCadastro +
+                ", url='" + url + '\'' +
+                ", usuarios=" + usuarios +
                 '}';
     }
 }

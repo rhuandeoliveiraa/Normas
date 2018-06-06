@@ -32,4 +32,6 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
     Usuario procurarPorLogin(String email);
 
+    String verificarSituacao(Long id);
+
 }

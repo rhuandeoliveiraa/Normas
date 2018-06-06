@@ -89,6 +89,13 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
 
     }
 
+    public String verificarSituacao(Long id){
+        Query query = this.entityManager.createQuery("select situacao from Usuario u where u.id = ?1 ");
+        query.setParameter(1,id);
+        return (String) query.getSingleResult();
+
+    }
+
     //Retorna o número de usuários cadastrados no banco de dados
     public Long numUsuarios(){
         Query query = this.entityManager.createQuery("SELECT count(*) FROM Usuario ");
