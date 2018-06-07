@@ -107,7 +107,7 @@ public class UsuarioController  {
             //Busca no banco de dados a data de cadastro do usuário e já salva automaticamente quando o usuário for editado
             usuario.setSituacao(usuarioDao.verificarSituacao(id));
             usuario.setDataCadastro(usuarioDao.buscarDataCadastro(id));
-            usuario.setConfirmacaoSenha(usuarioDao.buscarConfirmacaoSenha(id));
+            usuario.setConfirmacaoSenha(usuarioDao.buscarConfirmacaoSenha(usuario.getId()));
             usuarioDao.atualizar(id,usuario);
 
 
