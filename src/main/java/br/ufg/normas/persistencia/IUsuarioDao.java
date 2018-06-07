@@ -1,5 +1,6 @@
 package br.ufg.normas.persistencia;
 
+import br.ufg.normas.modelo.Situacao;
 import br.ufg.normas.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,10 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Long>  {
 
     Usuario procurarPorLogin(String email);
 
-    String verificarSituacao(Long id);
+    Situacao verificarSituacao(Long id);
+
+    String buscarSenha(Long id);
+
+    String buscarConfirmacaoSenha(Long id);
 
 }

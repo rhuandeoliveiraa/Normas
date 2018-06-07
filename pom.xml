@@ -89,6 +89,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.6</version>
+        </dependency>
+
         <!-- Dependencias para upload e download de arquivos
         <dependency>
             <groupId>commons-fileupload</groupId>

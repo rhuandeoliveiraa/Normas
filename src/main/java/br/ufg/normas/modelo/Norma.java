@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -34,6 +35,7 @@ public class Norma implements Serializable {
     @Expose
     @Column
     private String url;
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "usuarios_normas",

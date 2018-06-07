@@ -1,6 +1,7 @@
  package br.ufg.normas.persistencia;
 
  import br.ufg.normas.excecao.IdNaoValidoServiceException;
+ import br.ufg.normas.modelo.Situacao;
  import br.ufg.normas.modelo.Usuario;
  import org.springframework.stereotype.Repository;
  import org.springframework.transaction.annotation.Transactional;
@@ -89,10 +90,10 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
 
     }
 
-    public String verificarSituacao(Long id){
+    public Situacao verificarSituacao(Long id){
         Query query = this.entityManager.createQuery("select situacao from Usuario u where u.id = ?1 ");
         query.setParameter(1,id);
-        return (String) query.getSingleResult();
+        return (Situacao) query.getSingleResult();
 
     }
 
@@ -111,10 +112,30 @@ public class UsuarioDaoImpl  extends GenericDaoImpl<Usuario,Long> implements IUs
         return (Date) query.getSingleResult();
     }
 
+    public String buscarDadosUsuario(Long id){
+        Query query = this.entityManager.createQuery("select nome, sobrenome, email, senha, confirmacaoSenha from Usuario where id = ?1");
+        query.setParameter(1,id);
+        return (String) query.getSingleResult();
+
+    }
+
+    public String buscarSenha(Long id){
+        Query query = this.entityManager.createQuery("select senha from Usuario where id = ?1");
+        query.setParameter(1,id);
+        return (String) query.getSingleResult();
+    }
+
+    public String buscarConfirmacaoSenha(Long id){
+        Query query = this.entityManager.createQuery("select confirmacaoSenha from Usuario where id = ?1");
+        query.setParameter(1,id);
+        return (String) query.getSingleResult();
+    }
+
     private Long idValido(Long id) {
         if (id <= 0) {
             throw new IdNaoValidoServiceException("Valor do campo id está invalido. Deve ser uma valor inteiro maior que zero.");
         }
         return id;
     }
+
 }

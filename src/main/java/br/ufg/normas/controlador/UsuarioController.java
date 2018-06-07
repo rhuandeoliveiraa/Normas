@@ -69,22 +69,52 @@ public class UsuarioController  {
         return new RespostaHttp("MS01",usuario.getId());
 
     }
-/*
+
     @GetMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public RespostaHttp logar(@RequestBody Usuario usuario){
 
-       // usuarioDao.procurarPorLogin(usuario.getEmail());
+        usuarioDao.procurarPorLogin(usuario.getEmail());
+        //if ()
          return new RespostaHttp("MS01");
 
     }
-*/
+
     // normas/usuarios/editar/iddesejado
     @PutMapping("/editar/{id}")
     @ResponseStatus(HttpStatus.OK)
     public RespostaHttp editar(@PathVariable("id") Long id, @RequestBody Usuario usuario){
+
+        if(!Strings.isNullOrEmpty(usuario.getNome()) || !Strings.isNullOrEmpty(usuario.getSobrenome()) ||
+                !Strings.isNullOrEmpty(usuario.getEmail() )|| !Strings.isNullOrEmpty(usuario.getSenha())) {
+            //verificar se email e senha são válidos
+         if (!Validacao.validarEmail(usuario.getEmail()) ||
+                    !Validacao.validarSenha(usuario.getSenha())) {
+                throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME09",TipoRetorno.ERRO)));
+            }
+            /*
+            //verificar se a senha é igual a nova  senha
+            else if(!usuario.getSenha().equals(usuarioDao.buscarSenha(id))) {
+                throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME19",TipoRetorno.ERRO)));
+            }*/
+
+            //Buscando a situação do usuário no banco de dados.
+            if ((usuarioDao.verificarSituacao(id).equals(Situacao.BLOQUEADO) )){
+                throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME10_2",TipoRetorno.ERRO)));
+
+            }
+
+            //Busca no banco de dados a data de cadastro do usuário e já salva automaticamente quando o usuário for editado
+            usuario.setSituacao(usuarioDao.verificarSituacao(id));
+            usuario.setDataCadastro(usuarioDao.buscarDataCadastro(id));
+            usuario.setConfirmacaoSenha(usuarioDao.buscarConfirmacaoSenha(id));
+            usuarioDao.atualizar(id,usuario);
+
+
+        }
+    /*
         //Buscando a situação do usuário no banco de dados.
-        if ((usuarioDao.verificarSituacao(id).equals("INATIVO") )){
+        if ((usuarioDao.verificarSituacao(id).equals(Situacao.BLOQUEADO) )){
             throw new NegocioExcecao(Collections.singletonList(new RespostaHttp("ME10_2",TipoRetorno.ERRO)));
 
         }
@@ -92,7 +122,12 @@ public class UsuarioController  {
         //Busca no banco de dados a data de cadastro do usuário e já salva automaticamente quando o usuário for editado
         usuario.setDataCadastro(usuarioDao.buscarDataCadastro(id));
 
+        usuario.setSituacao(usuarioDao.verificarSituacao(id));
+        //usuario.setEmail();
+
+
         usuarioDao.atualizar(id,usuario);
+        return new RespostaHttp("MS01",usuario.getId());*/
         return new RespostaHttp("MS01",usuario.getId());
     }
 
@@ -124,6 +159,8 @@ public class UsuarioController  {
             return new RespostaHttp("MS01", usuario);
         }
     }
+
+
 
     // normas/usuarios/listar/
 
