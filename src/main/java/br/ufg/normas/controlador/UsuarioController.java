@@ -172,6 +172,7 @@ public class UsuarioController  {
             return new RespostaHttp("MA01",TipoRetorno.ALERTA);
         }
         else {
+            Collections.sort(usuario);
             return new RespostaHttp("MS01", usuario);
         }
         }

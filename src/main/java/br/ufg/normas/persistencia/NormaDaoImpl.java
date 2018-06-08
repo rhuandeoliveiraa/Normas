@@ -86,6 +86,8 @@ public class NormaDaoImpl extends GenericDaoImpl<Norma,Long> implements INormaDa
 
     }
 
+
+
     private Long idValido(Long id) {
         if (id <= 0) {
             throw new IdNaoValidoServiceException("Valor do campo id está invalido. Deve ser uma valor inteiro maior que zero.");

@@ -2,22 +2,22 @@ package br.ufg.normas.modelo;
 
 
 import com.google.gson.annotations.Expose;
-import org.hibernate.mapping.Set;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.Collator;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
+import java.lang.Comparable;
 
 @Entity
 @SequenceGenerator(name = "usuario_seq", sequenceName = "usuario_seq", initialValue = 1 ,allocationSize = 1)
 @Table(name = "usuarios")
-public class Usuario implements Serializable, UserDetails {
+public class Usuario implements Serializable, UserDetails,Comparable<Usuario> {
 
     @Expose
     @Id
@@ -122,7 +122,6 @@ public class Usuario implements Serializable, UserDetails {
 
     private int numTentativas = 0;
     */
-
 
     public Long getId() {
         return id;
@@ -265,4 +264,12 @@ public class Usuario implements Serializable, UserDetails {
                 ", normas=" + normas +
                 '}';
     }
+
+    @Override
+    public int compareTo(Usuario usuario) {
+        return Collator.getInstance().compare(this.nome,usuario.nome);
+    }
+
+
+
 }

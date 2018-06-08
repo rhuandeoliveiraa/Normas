@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.net.URL;
+import java.text.Collator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "normas")
-public class Norma implements Serializable {
+public class Norma implements Serializable,Comparable<Norma>{
 
     @Expose
     @Id
@@ -45,6 +46,7 @@ public class Norma implements Serializable {
 
    /* @Column
     private String arquivo;*/
+
 
     public Long getId() {
         return id;
@@ -124,4 +126,10 @@ public class Norma implements Serializable {
                 ", usuarios=" + usuarios +
                 '}';
     }
+
+    @Override
+    public int compareTo(Norma norma) {
+        return Collator.getInstance().compare(this.nome,norma.nome);
+    }
+
 }

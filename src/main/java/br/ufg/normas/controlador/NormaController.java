@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.Collator;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -102,6 +103,13 @@ public class NormaController {
             return new RespostaHttp("MS01", norma);
         }
     }
+
+    @GetMapping("/visualizar/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public RespostaHttp visualizarURL(@PathVariable("id") Long id){
+        Norma norma = normaDao.procurarPorId(id);
+        return new RespostaHttp("MS01",norma.getUrl());
+    }
 /*
     @GetMapping("/pesquisar/{descricao}")
     @ResponseStatus(HttpStatus.OK)
@@ -125,9 +133,12 @@ public class NormaController {
             return new RespostaHttp("MA01",TipoRetorno.ALERTA);
         }
         else {
+            Collections.sort(normas);
             return new RespostaHttp("MS01", normas);
         }
 
-        //return normaDao.procurarTodos();
+
     }
+
+
 }
